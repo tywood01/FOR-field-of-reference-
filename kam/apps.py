@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ForConfig(AppConfig):
+class KamConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'for'
+    name = 'kam'
