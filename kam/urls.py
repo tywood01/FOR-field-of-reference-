@@ -15,4 +15,5 @@ from . import views
 app_name = "kam"
 urlpatterns = [
     path("", views.take_picture, name="take_picture"),
+    path("home", views.home, name="home"),
 ]
