@@ -1,7 +1,7 @@
 import base64
 from django import forms
 from django.core.files.base import ContentFile
-from kam.models import picture
+from kam.models import Picture
 
 
 class Form(forms.Form):
@@ -12,7 +12,7 @@ class Form(forms.Form):
         self.request = request
 
     def save(self, commit=True):
-        new_picture = picture()
+        new_picture = Picture()
         image_data = self.cleaned_data["image"]
 
         # Decode the Base64 string (remove the prefix "data:image/png;base64,")

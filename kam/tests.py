@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.files.base import ContentFile
 from kam.forms import Form
-from kam.models import picture
+from kam.models import Picture
 from faker import Faker
 import base64
 
@@ -30,7 +30,7 @@ class PictureFormTestCase(TestCase):
         instance.refresh_from_db()
 
         # Check that the picture instance is saved correctly
-        self.assertIsInstance(instance, picture)
+        self.assertIsInstance(instance, Picture)
         self.assertIsNotNone(instance.pk)
 
         # Check that the image content is saved correctly

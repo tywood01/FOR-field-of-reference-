@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from kam.forms import Form
 from django.http import HttpResponseRedirect
-from .models import picture
+from .models import Picture
 # Create your views here.
 
 
@@ -15,7 +15,7 @@ def take_picture(request):
         if form.is_valid():
             instance = form.save()
             instance.save()
-            return HttpResponseRedirect("/kam/home")
+            return HttpResponseRedirect("/kam/gallery")
 
         print(form.errors)
 
@@ -27,6 +27,7 @@ def home(request):
 
     return render(request, "kam/home.html")
 
+
 def picture_gallery(request):
-    pictures = picture.objects.all()
-    return render(request, 'kam/gallery.html', {'pictures': pictures})
+    pictures = Picture.objects.all()
+    return render(request, "kam/gallery.html", {"pictures": pictures})
