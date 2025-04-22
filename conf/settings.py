@@ -55,6 +55,12 @@ ROOT_URLCONF = "conf.urls"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "kam/static",
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
