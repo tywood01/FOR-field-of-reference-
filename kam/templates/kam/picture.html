@@ -1,8 +1,48 @@
-
-<form enctype="multipart/form-data" method="post">
+<form id="picture-form" enctype="multipart/form-data" method="post">
     {% csrf_token %}
-    
     {{ form }}
+    <input type="hidden" id="image-data" name="image_data">
 
-    <button>Submit</button>
+    <script>
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // MediaDevices API is available
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            const videoElement = document.getElementById('camera-stream');
+            videoElement.srcObject = stream;
+        })
+        .catch(function(error) {
+            console.error("Error accessing the camera", error);
+        });
+
+    } else {
+        alert("Camera API not supported by this browser.");
+    }
+
+    function captureImageAndSubmit() {
+        const canvas = document.getElementById('image-capture');
+        const context = canvas.getContext('2d');
+        const video = document.getElementById('camera-stream');
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Export the canvas image as data URL
+        const imageDataUrl = canvas.toDataURL('image/png');
+
+        // Set the value of the hidden input field to the image data
+        const imageInput = document.getElementById('id_image');
+        imageInput.value = imageDataUrl;
+
+        // Submit the form programmatically
+        const form = document.getElementById('picture-form');
+        form.submit();
+    }
+    </script>
+
+    <button type="button" onclick="captureImageAndSubmit()">Capture and Submit</button>
+
+    <video id="camera-stream" autoplay></video>
+    <canvas id="image-capture" style="display:none;"></canvas>
 </form>
