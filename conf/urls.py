@@ -23,6 +23,7 @@ from kam.views import service_worker
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('accounts/', include("allauth.urls")),
     path("kam/", include("kam.urls")),
     path("serviceworker.js", service_worker, name="service_worker"),
     *static.static(conf.settings.STATIC_URL, document_root=conf.settings.STATIC_ROOT),

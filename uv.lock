@@ -25,6 +25,16 @@ wheels = [
 ]
 
 [[package]]
+name = "django-allauth"
+version = "65.7.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4b/08/8557880768ba4d5966195ee5e57c69d8b9425c62ffb80293e2ad36dffb83/django_allauth-65.7.0.tar.gz", hash = "sha256:eb060692150f39e1529893c2de5f9b46e1dab51153ff6cca7ad72c7c125259ea", size = 1640126 }
+
+[[package]]
 name = "faker"
 version = "37.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -42,6 +52,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
+    { name = "django-allauth" },
     { name = "pillow" },
     { name = "whitenoise" },
 ]
@@ -54,6 +65,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=5.2" },
+    { name = "django-allauth", specifier = ">=65.7.0" },
     { name = "pillow", specifier = ">=11.2.1" },
     { name = "whitenoise", specifier = ">=6.9.0" },
 ]
