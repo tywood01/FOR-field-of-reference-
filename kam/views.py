@@ -31,3 +31,17 @@ def home(request):
 def picture_gallery(request):
     pictures = Picture.objects.all()
     return render(request, "kam/gallery.html", {"pictures": pictures})
+
+
+def manifest(request):
+    """Render the manifest file."""
+
+    return render(request, "kam/manifest.json", content_type="application/json")
+
+
+def service_worker(request):
+    """Render the service worker file."""
+
+    return render(
+        request, "kam/serviceworker.js", content_type="application/javascript"
+    )

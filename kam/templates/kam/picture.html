@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Picture Capture</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 </head>
 <body>
     <form id="picture-form" enctype="multipart/form-data" method="post">
@@ -13,18 +14,26 @@
         {{ form }}
         <input type="hidden" id="image-data" name="image_data">
 
-        <script>
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            // MediaDevices API is available
-            navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function(stream) {
-                const videoElement = document.getElementById('camera-stream');
-                videoElement.srcObject = stream;
-            })
-            .catch(function(error) {
-                console.error("Error accessing the camera", error);
-            });
+        <!-- Camera Video Stream -->
+        <video id="camera-stream" autoplay playsinline></video>
 
+        <!-- Hidden Canvas for Capture -->
+        <canvas id="image-capture"></canvas>
+
+        <!-- Snap Button -->
+        <button type="button" onclick="captureImageAndSubmit()">Snap ;)</button>
+    </form>
+
+    <script>
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    const videoElement = document.getElementById('camera-stream');
+                    videoElement.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error("Error accessing the camera", error);
+                });
         } else {
             alert("Camera API not supported by this browser.");
         }
@@ -38,23 +47,25 @@
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            // Export the canvas image as data URL
             const imageDataUrl = canvas.toDataURL('image/png');
-
-            // Set the value of the hidden input field to the image data
             const imageInput = document.getElementById('id_image');
             imageInput.value = imageDataUrl;
 
-            // Submit the form programmatically
-            const form = document.getElementById('picture-form');
-            form.submit();
+            document.getElementById('picture-form').submit();
         }
-        </script>
+    </script>
 
-        <button type="button" onclick="captureImageAndSubmit()">Snap ;)</button>
-
-        <video id="camera-stream" autoplay></video>
-        <canvas id="image-capture" style="display:none;"></canvas>
-    </form>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("/serviceworker.js", { scope: "/" })
+                .then((registration) => {
+                    console.log("Service Worker registered with scope:", registration.scope);
+                })
+                .catch((error) => {
+                    console.error("Service Worker registration failed:", error);
+                });
+        }
+    </script>
 </body>
 </html>

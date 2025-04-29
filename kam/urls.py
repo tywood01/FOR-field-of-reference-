@@ -16,5 +16,6 @@ app_name = "kam"
 urlpatterns = [
     path("", views.take_picture, name="take_picture"),
     path("home", views.home, name="home"),
-    path('gallery', views.picture_gallery, name='picture_gallery'),
+    path("gallery", views.picture_gallery, name="picture_gallery"),
+    path("manifest.json", views.manifest, name="manifest"),
 ]

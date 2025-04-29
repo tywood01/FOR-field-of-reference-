@@ -1,46 +1,100 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #000000;
+/* Reset & Base Setup */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 2rem;
 }
 
+/* Form Container */
 form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 640px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #000000;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    gap: 2rem;
+    transition: all 0.3s ease;
 }
 
+/* Button Style */
 button {
-    background-color: #000000;
-    color: #ffffff;
+    appearance: none;
+    background: #111;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
+    border-radius: 999px;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    border-radius: 3px;
-    font-size: 16px;
+    letter-spacing: 0.03em;
+    transition: background 0.3s ease;
 }
 
 button:hover {
-    background-color: #444444;
+    background: #333;
 }
 
-video {
-    border: 1px solid #000000;
-    margin-top: 10px;
-    max-width: 100%;
+/* Camera Stream */
+video#camera-stream {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
 }
 
-canvas {
+/* Hidden Canvas */
+canvas#image-capture {
     display: none;
+}
+
+/* Form Fields Styling */
+form input,
+form select,
+form textarea {
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    width: 100%;
+    background: #f9f9f9;
+    color: #1a1a1a;
+    transition: border 0.2s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #111;
+    outline: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    form {
+        padding: 1rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    button {
+        width: 100%;
+    }
 }

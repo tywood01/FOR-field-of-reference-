@@ -19,10 +19,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import static
 from django import conf
+from kam.views import service_worker
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("kam/", include("kam.urls")),
+    path("serviceworker.js", service_worker, name="service_worker"),
     *static.static(conf.settings.STATIC_URL, document_root=conf.settings.STATIC_ROOT),
     *static.static(conf.settings.MEDIA_URL, document_root=conf.settings.MEDIA_ROOT),
 ]
