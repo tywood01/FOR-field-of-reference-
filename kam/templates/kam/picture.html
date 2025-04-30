@@ -9,6 +9,8 @@
     <link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 </head>
 <body>
+    <div id="divInstallApp"></div>
+
     <form id="picture-form" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form }}
@@ -56,15 +58,27 @@
     </script>
 
     <script>
-        if ("serviceWorker" in navigator) {
+    if ("serviceWorker" in navigator) {
             navigator.serviceWorker
-                .register("/serviceworker.js", { scope: "/" })
-                .then((registration) => {
-                    console.log("Service Worker registered with scope:", registration.scope);
-                })
-                .catch((error) => {
-                    console.error("Service Worker registration failed:", error);
+            .register("/serviceworker.js", { scope: "/" })
+            .then((registration) => {
+                registration.unregister().then((boolean) => {
                 });
+            })
+            .catch((error) => {
+                
+            });
+            // Befor install prompt start
+            window.addEventListener('beforeinstallprompt', event => {
+            event.preventDefault();
+            var installDiv = document.getElementById('divInstallApp');
+            installDiv.innerHTML = '<button id="installApp" class="btn btn-outline-secondary ms-1">Install App</button>';
+            installDiv.addEventListener('click', () => {
+                event.prompt();
+                installDiv.innerHTML = ""
+            });
+            });
+            // Befor install prompt end
         }
     </script>
 </body>

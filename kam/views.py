@@ -15,7 +15,7 @@ def take_picture(request):
         if form.is_valid():
             instance = form.save()
             instance.save()
-            return HttpResponseRedirect("/kam/gallery")
+            return HttpResponseRedirect("/kam/home")
 
         print(form.errors)
 

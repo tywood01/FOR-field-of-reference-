@@ -20,12 +20,14 @@ from django.urls import path, include
 from django.conf.urls import static
 from django import conf
 from kam.views import service_worker
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('accounts/', include("allauth.urls")),
+    path("", RedirectView.as_view(url="/kam/home", permanent=True)),
     path("kam/", include("kam.urls")),
+    path("admin/", admin.site.urls),
     path("serviceworker.js", service_worker, name="service_worker"),
+    path("accounts/", include("allauth.urls")),
     *static.static(conf.settings.STATIC_URL, document_root=conf.settings.STATIC_ROOT),
     *static.static(conf.settings.MEDIA_URL, document_root=conf.settings.MEDIA_ROOT),
 ]

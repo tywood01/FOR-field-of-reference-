@@ -1,12 +1,87 @@
 {
- "name": "Kam",
- "short_name": "Kam",
- "start_url": "/",
- "display": "standalone",
- "background_color": "#ffffff",
- "theme_color": "#67798e",
- "orientation": "portrait-primary",
- "icons": [
-  
-]
+  "name": "Kam",
+  "short_name": "Kam",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#67798e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Square44x44Logo.targetsize-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/SplashScreen.scale-100.png",
+      "sizes": "620x300",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/SplashScreen.scale-400.png",
+      "sizes": "2480x1200",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Wide310x150Logo.scale-100.png",
+      "sizes": "310x150",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/Wide310x150Logo.scale-400.png",
+      "sizes": "1240x600",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/LargeTile.scale-100.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/LargeTile.scale-400.png",
+      "sizes": "1240x1240",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/SmallTile.scale-100.png",
+      "sizes": "71x71",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/appimages/windows11/SmallTile.scale-400.png",
+      "sizes": "284x284",
+      "type": "image/png"
+    }
+  ]
 }
+
