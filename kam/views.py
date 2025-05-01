@@ -1,20 +1,42 @@
 from django.shortcuts import render
-from kam.forms import Form
+from kam.forms import AlbumForm, ImageForm
 from django.http import HttpResponseRedirect
 from .models import Picture, Album
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 # Create your views here.
 
 def edit_album(request):
     pass
 
+
+@login_required
+def create_album(request):
+
+    form = AlbumForm(request)
+
+
+    if request.method == "POST":
+        form = AlbumForm(request, request.POST,)
+
+        if form.is_valid():
+            album = form.save(commit=False)
+            album.owner = request.user
+            album.save()
+
+            return HttpResponseRedirect(reverse("kam:all_albums"))        
+        print(form.errors)   
+
+    return render(request, "kam/create_album.html", {"form": form,})
+
+
 def take_picture(request, user_id, album_id):
     """Create an image and submit it to the database."""
 
-    form = Form(request)
+    form = ImageForm(request)
 
     if request.method == "POST":
-        form = Form(request, request.POST, request.FILES)
+        form = ImageForm(request, request.POST, request.FILES)
         if form.is_valid():
             instance = form.save()
             instance.save()

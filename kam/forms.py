@@ -1,10 +1,10 @@
 import base64
 from django import forms
 from django.core.files.base import ContentFile
-from kam.models import Picture
+from kam.models import Picture, Album
 
 
-class Form(forms.Form):
+class ImageForm(forms.Form):
     image = forms.CharField(widget=forms.TextInput(attrs={"type": "hidden"}))
 
     def __init__(self, request, *args, **kwargs):
@@ -12,7 +12,7 @@ class Form(forms.Form):
         self.request = request
 
     def save(self, commit=True):
-        new_picture = Picture()
+        new_picture = Picture(album=self.album)
         image_data = self.cleaned_data["image"]
 
         # Decode the Base64 string (remove the prefix "data:image/png;base64,")
@@ -31,3 +31,37 @@ class Form(forms.Form):
             new_picture.save()
 
         return new_picture
+
+
+class AlbumForm(forms.ModelForm):
+
+    def __init__(self, request, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        self.instance.user = request.user
+        
+    class Meta:
+        model = Album
+        fields = ['name', 'description']
+
+        widgets = {
+            "name" : forms.Textarea(
+                attrs={
+                    "rows" : 3,
+                    "cols" : 60,
+                    "placeholder" : "fun album name! :)",
+                    "maxlength" : 255,
+                }
+            ),
+            "description" : forms.Textarea(
+                attrs={
+                    "rows" : 3,
+                    "cols" : 60,
+                    "placeholder" : "fun album name! :)",
+                    "maxlength" : 255,
+                }
+            ),
+        
+        }
+
+

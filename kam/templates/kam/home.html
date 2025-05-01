@@ -7,8 +7,7 @@
 <!-- user logged in -->
 {% if request.user.is_authenticated %}
 
-<!-- TODO: Change url to create an Album -->
-<a href="{% url 'kam:take_picture' %}">
+<a href="{% url 'kam:create_album' %}">
     <button type="button">Create Album</button>
 </a>
 
@@ -24,3 +23,6 @@
     <button type="button">Login</button>
 </a>
 {% endif %}
+
+
+

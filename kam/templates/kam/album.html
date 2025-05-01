@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Picture Album</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card h3 {
+      margin: 0;
+      padding: 8px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Picture Album</h1>
+  <div class="gallery">
+    {% for picture in album_pictures %}
+      <div class="card">
+        <img src="{{ picture.image.url }}">
+      </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

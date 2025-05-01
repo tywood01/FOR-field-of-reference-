@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from django.db.models.manager import RelatedManager
 
 
 class Album(models.Model):
@@ -8,11 +12,13 @@ class Album(models.Model):
     name = models.CharField(max_length=256, default="")
     description = models.TextField(default="")
 
+    pictures: "RelatedManager[Picture]"
+
 
 class Picture(models.Model):
     id = models.AutoField(primary_key=True)
     image = models.ImageField(upload_to="images/")
     name = models.CharField(max_length=256, default="")
     album = models.ForeignKey(
-        Album, on_delete=models.CASCADE, null=True, blank=True, related_name="pictures"
+        Album, on_delete=models.CASCADE, related_name="pictures"
     )
