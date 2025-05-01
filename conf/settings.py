@@ -158,6 +158,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-LOGIN_REDIRECT_URL = reverse_lazy("kam:picture_gallery")
-ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("kam:picture_gallery")
-ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("kam:picture_gallery")
+LOGIN_REDIRECT_URL = reverse_lazy("kam:home")
+ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("kam:home")
+ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("kam:home")

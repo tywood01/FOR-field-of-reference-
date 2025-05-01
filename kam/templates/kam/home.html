@@ -3,4 +3,30 @@
 
 <h1> This is the main homepage </h1>
 
-<a href="{% url 'kam:take_picture' %}">Snap</a>
+
+<!-- user logged in -->
+{% if request.user.is_authenticated %}
+
+<!-- TODO: Change url to create an Album -->
+<a href="{% url 'kam:take_picture' %}">
+    <button type="button">Create Album</button>
+</a>
+
+
+<a href="{% url 'account_logout' %}">
+    <button type="button">Logout</button>
+</a>
+
+
+<!-- user not logged in -->
+{% else %}
+<a href="{% url 'account_login' %}">
+    <button type="button">Login</button>
+</a>
+{% endif %}
+
+
+
+<a href="{% url 'kam:take_picture' %}">
+    <button type="button">Snap a Picture</button>
+</a>
