@@ -1,0 +1,7 @@
+<h1>Here are all your albums</h1>
+
+  {% for album in albums %}
+  <a href="{% url 'kam:home' %}">
+    {{ album.name }}</a>
+    <p>{{ album.description }}</p>
+  {% endfor %}

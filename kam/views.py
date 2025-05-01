@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from kam.forms import Form
 from django.http import HttpResponseRedirect
-from .models import Picture
+from .models import Picture, Album
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+def edit_album(request):
+    pass
 
-def take_picture(request):
+def take_picture(request, user_id, album_id):
     """Create an image and submit it to the database."""
 
     form = Form(request)
@@ -28,9 +31,18 @@ def home(request):
     return render(request, "kam/home.html")
 
 
-def picture_gallery(request):
+def picture_gallery(request, user_id, album_id):
     pictures = Picture.objects.all()
     return render(request, "kam/gallery.html", {"pictures": pictures})
+
+
+@login_required
+def all_albums(request):
+    
+    albums = Album.objects.filter(
+        owner = request.user
+    )
+    return render(request, "kam/all_albums.html", {"albums": albums})
 
 
 def manifest(request):
