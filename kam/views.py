@@ -2,6 +2,7 @@ from django.shortcuts import render
 from kam.forms import AlbumForm, ImageForm
 from django.http import HttpResponseRedirect
 from .models import Picture, Album
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 # Create your views here.
@@ -53,13 +54,18 @@ def home(request):
     return render(request, "kam/home.html")
 
 
-def picture_gallery(request, user_id, album_id):
-    pictures = Picture.objects.all()
-    return render(request, "kam/gallery.html", {"pictures": pictures})
+def picture_gallery(request, album_id):
+    """Displays all pictures from an album."""
+
+    album = get_object_or_404(Album, id=album_id, owner=request.user)
+    pictures = Picture.objects.filter(album=album)
+    
+    return render(request, "kam/gallery.html", {"pictures": pictures,"album":album})
 
 
 @login_required
 def all_albums(request):
+    """Displays all albums for a logged in user."""
     
     albums = Album.objects.filter(
         owner = request.user
