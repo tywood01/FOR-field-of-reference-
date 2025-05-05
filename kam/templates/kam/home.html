@@ -1,7 +1,11 @@
 
+<link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 
 
 <h1> This is the main homepage </h1>
+
+
+<div id="divInstallApp"></div>
 
 
 <!-- user logged in -->
@@ -30,4 +34,28 @@
 {% endif %}
 
 
+<script>
+    if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+            .register("/serviceworker.js", { scope: "/" })
+            .then((registration) => {
+                registration.unregister().then((boolean) => {
+                });
+            })
+            .catch((error) => {
+                
+            });
+            // Befor install prompt start
+            window.addEventListener('beforeinstallprompt', event => {
+            event.preventDefault();
+            var installDiv = document.getElementById('divInstallApp');
+            installDiv.innerHTML = '<button id="installApp" class="btn btn-outline-secondary ms-1">Install App</button>';
+            installDiv.addEventListener('click', () => {
+                event.prompt();
+                installDiv.innerHTML = ""
+            });
+            });
+            // Before install prompt end
+        }
+    </script>
 

@@ -32,6 +32,7 @@
                 .then(function(stream) {
                     const videoElement = document.getElementById('camera-stream');
                     videoElement.srcObject = stream;
+
                 })
                 .catch(function(error) {
                     console.error("Error accessing the camera", error);
@@ -45,40 +46,11 @@
             const context = canvas.getContext('2d');
             const video = document.getElementById('camera-stream');
 
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
             const imageDataUrl = canvas.toDataURL('image/png');
             const imageInput = document.getElementById('id_image');
             imageInput.value = imageDataUrl;
 
             document.getElementById('picture-form').submit();
-        }
-    </script>
-
-    <script>
-    if ("serviceWorker" in navigator) {
-            navigator.serviceWorker
-            .register("/serviceworker.js", { scope: "/" })
-            .then((registration) => {
-                registration.unregister().then((boolean) => {
-                });
-            })
-            .catch((error) => {
-                
-            });
-            // Befor install prompt start
-            window.addEventListener('beforeinstallprompt', event => {
-            event.preventDefault();
-            var installDiv = document.getElementById('divInstallApp');
-            installDiv.innerHTML = '<button id="installApp" class="btn btn-outline-secondary ms-1">Install App</button>';
-            installDiv.addEventListener('click', () => {
-                event.prompt();
-                installDiv.innerHTML = ""
-            });
-            });
-            // Before install prompt end
         }
     </script>
 </body>
