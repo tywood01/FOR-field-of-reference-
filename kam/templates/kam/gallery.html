@@ -35,7 +35,24 @@
 <body>
   <h1>Picture Gallery</h1>
 
+
+
+  <!-- user logged in -->
+{% if request.user.is_authenticated %}
+
+<a href="{% url 'kam:all_albums' %}">
+    <button type="button">View All Albums</button>
+</a>
+
+{% endif %}
+
+  <a href="{% url 'kam:take_picture' album.id %}">
+    <button type="button">Snap a Picture</button>
+  </a>
+
   <div class="gallery">
+
+
     {% for picture in pictures %}
       <div class="card">
         <img src="{{ picture.image.url }}">

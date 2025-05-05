@@ -23,7 +23,7 @@ from kam.views import service_worker
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path("", RedirectView.as_view(url="/kam/home", permanent=True)),
+    path("", RedirectView.as_view(url="/kam", permanent=True)),
     path("kam/", include("kam.urls")),
     path("admin/", admin.site.urls),
     path("serviceworker.js", service_worker, name="service_worker"),

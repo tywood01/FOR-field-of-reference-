@@ -1,5 +1,11 @@
 <h1>Here are all your albums</h1>
 
+<a href="{% url 'kam:create_album' %}">
+  <button type="button">Create Album</button>
+</a>
+
+<br><br/>
+
   {% for album in albums %}
   <a href="{% url 'kam:picture_gallery' album.id %}">
     {{ album.name }}</a>
