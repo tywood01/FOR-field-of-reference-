@@ -1,13 +1,63 @@
-<h1>Here are all your albums</h1>
+{% extends "kam/base.html" %}
+{% block content %}
+{% load static %}
 
-<a href="{% url 'kam:create_album' %}">
-  <button type="button">Create Album</button>
-</a>
 
-<br><br/>
+<h1 class="text-3xl font-bold text-center mb-8">Your Photo Albums</h1>
 
+<div class="text-center mb-6">
+  <a href="{% url 'kam:home' %}">
+    <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition">Home</button>
+  </a>
+</div>
+
+<div class="text-center mb-6">
+  <a href="{% url 'kam:create_album' %}">
+    <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition">Create Album</button>
+  </a>
+</div>
+
+
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
   {% for album in albums %}
-  <a href="{% url 'kam:picture_gallery' album.id %}">
-    {{ album.name }}</a>
-    <p>{{ album.description }}</p>
+    <div class="org-card border rounded-lg shadow-lg p-4">
+      <a href="{% url 'kam:picture_gallery' album.id %}">
+        <div class="org-image-container relative h-48 overflow-hidden rounded">
+          {% for picture in album.pictures.all %}
+            <img class="org-image absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}" src="{{ picture.image.url }}" alt="{{ album.name }}">
+          {% endfor %}
+        </div>
+      </a>
+      <div class="mt-4">
+        <h2 class="text-xl font-semibold">{{ album.name }}</h2>
+        <p class="text-gray-600">{{ album.description }}</p>
+      </div>
+    </div>
   {% endfor %}
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".org-card");
+
+  cards.forEach(card => {
+    const images = card.querySelectorAll(".org-image");
+    let index = 0;
+
+    if (images.length > 1) {
+      setInterval(() => {
+        images[index].classList.remove("opacity-100");
+        images[index].classList.add("opacity-0");
+
+        index = (index + 1) % images.length;
+
+        images[index].classList.remove("opacity-0");
+        images[index].classList.add("opacity-100");
+      }, Math.floor(Math.random() * (8000 - 4000 + 1)) + 4000);
+    }
+  });
+});
+</script>
+
+{% endblock %}

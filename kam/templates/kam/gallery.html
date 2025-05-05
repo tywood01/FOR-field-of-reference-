@@ -1,71 +1,38 @@
+{% extends "kam/base.html" %}
+{% block content %}
+{% load static %}
 {% load qr_code %}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Picture Gallery</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f5f5f5;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .card img {
-      width: 100%;
-      height: auto;
-    }
-    .card h3 {
-      margin: 0;
-      padding: 8px;
-      font-size: 1rem;
-    }
-  </style>
-</head>
-<body>
-  <h1>Picture Gallery</h1>
-  <h1>Album Settings: {{ album.name }}</h1>
+<h1 class="text-4xl font-bold mb-8 text-center">{{ album.name }} - Picture Gallery</h1>
+<p class="text-lg text-center text-gray-700 mb-8">{{ album.description }}</p>
+
+<div class="flex flex-col items-center gap-4 mb-8">
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'kam:all_albums' %}">
+      <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition">
+        View All Albums
+      </button>
+    </a>
 
 
-
-  <!-- user logged in -->
-{% if request.user.is_authenticated %}
-
-<a href="{% url 'kam:all_albums' %}">
-    <button type="button">View All Albums</button>
-</a>
-
-<h3>Share this QR code to let others add pictures:</h3>
-<div>{% qr_from_text album_url size="T" image_format="png" %}</div>
-
-{% endif %}
+    <h3>Share this QR code to let others add pictures:</h3>
+    <div>{% qr_from_text album_url size="T" image_format="png" %}</div>
+  {% endif %}
 
   <a href="{% url 'kam:take_picture' album.id %}">
-    <button type="button">Snap a Picture</button>
+    <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800  transition">
+      Snap a Picture
+    </button>
   </a>
+</div>
 
-  <div class="gallery">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {% for picture in pictures %}
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+      <img src="{{ picture.image.url }}" alt="Picture" class="w-full h-auto object-cover" />
+    </div>
+  {% endfor %}
+</div>
 
-
-    {% for picture in pictures %}
-      <div class="card">
-        <img src="{{ picture.image.url }}">
-      </div>
-    {% endfor %}
-  </div>
-
-</body>
-</html>
+{% endblock %}
