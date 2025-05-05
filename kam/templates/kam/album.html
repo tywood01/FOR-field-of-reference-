@@ -33,14 +33,20 @@
   </style>
 </head>
 <body>
-  <h1>Picture Album</h1>
+  <h1>Album</h1>
   <div class="gallery">
-    {% for picture in album_pictures %}
+  {% csrf_token %}
+
+  {% for album in albums %}
+    <a href="{% url 'kam:take_picture' album.owner.id album.id %}"> Snap A Pic </a>
+  {% endfor %}
+    {% for picture in pictures %}
       <div class="card">
         <img src="{{ picture.image.url }}">
       </div>
     {% endfor %}
   </div>
+
 
 </body>
 </html>

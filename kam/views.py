@@ -44,8 +44,12 @@ def take_picture(request, user_id, album_id):
 
         print(form.errors)
 
-    return render(request, "kam/picture.html", {"form": form})
-
+    return render(request, "kam/picture.html", 
+        {
+            "form": form,
+            "user_id": user_id,
+            "album_id": album_id,
+        })
 
 def home(request):
     """Render the home page."""
@@ -55,7 +59,12 @@ def home(request):
 
 def picture_gallery(request, user_id, album_id):
     pictures = Picture.objects.all()
-    return render(request, "kam/gallery.html", {"pictures": pictures})
+    return render(request, "kam/gallery.html", 
+        {
+            "pictures": pictures, 
+            "user_id": user_id,
+            "album_id": album_id,
+        })
 
 
 @login_required
