@@ -17,8 +17,10 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("albums", views.all_albums, name="all_albums"),
     path("albums/create/", views.create_album, name="create_album"),
-    path("albums/<int:album_id>/gallery", views.picture_gallery, name="picture_gallery"),
-    path("<int:user_id>/<int:album_id>/edit", views.edit_album, name="edit_album"),
-    path("<int:user_id>/<int:album_id>/snap", views.take_picture, name="take_picture"),
+    path(
+        "albums/<int:album_id>/gallery", views.picture_gallery, name="picture_gallery"
+    ),
+    path("albums/<int:album_id>/edit", views.edit_album, name="edit_album"),
+    path("albums/<int:album_id>/snap", views.take_picture, name="take_picture"),
     path("manifest.json", views.manifest, name="manifest"),
 ]
