@@ -9,7 +9,7 @@ Purpose:
 
 """
 
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = "kam"
@@ -23,4 +23,5 @@ urlpatterns = [
     path("albums/<int:album_id>/edit", views.edit_album, name="edit_album"),
     path("albums/<int:album_id>/snap", views.take_picture, name="take_picture"),
     path("manifest.json", views.manifest, name="manifest"),
+    path("qr-code/", include("qr_code.urls", namespace="qr_code")),
 ]

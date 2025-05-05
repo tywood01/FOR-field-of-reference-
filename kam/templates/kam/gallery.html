@@ -1,3 +1,6 @@
+{% load qr_code %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +37,7 @@
 </head>
 <body>
   <h1>Picture Gallery</h1>
+  <h1>Album Settings: {{ album.name }}</h1>
 
 
 
@@ -43,6 +47,9 @@
 <a href="{% url 'kam:all_albums' %}">
     <button type="button">View All Albums</button>
 </a>
+
+<h3>Share this QR code to let others add pictures:</h3>
+<div>{% qr_from_text album_url size="T" image_format="png" %}</div>
 
 {% endif %}
 

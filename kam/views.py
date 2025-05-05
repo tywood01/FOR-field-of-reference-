@@ -66,8 +66,14 @@ def home(request):
 def picture_gallery(request, album_id):
     """Display all pictures in a specific album."""
     pictures = Picture.objects.filter(album_id=album_id)
-    album = Album.objects.get(id=album_id)
-    return render(request, "kam/gallery.html", {"pictures": pictures, "album": album})
+
+    context = {
+        "pictures": pictures,
+        "album": Album.objects.get(id=album_id),
+        "album_url": f"/kam/albums/{album_id}/gallery",
+    }
+
+    return render(request, "kam/gallery.html", context)
 
 
 @login_required
