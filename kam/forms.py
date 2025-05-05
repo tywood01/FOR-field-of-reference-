@@ -58,17 +58,17 @@ class AlbumForm(forms.ModelForm):
             "name": forms.Textarea(
                 attrs={
                     "rows": 3,
-                    "cols": 60,
-                    "placeholder": "fun album name! :)",
+                    "placeholder": "Name this album!",
                     "maxlength": 255,
+                    "class": "w-full resize-none rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-black",
                 }
             ),
             "description": forms.Textarea(
                 attrs={
-                    "rows": 3,
-                    "cols": 60,
-                    "placeholder": "fun album name! :)",
+                    "rows": 5,
+                    "placeholder": "Make a description for this album!",
                     "maxlength": 255,
+                    "class": "w-full resize-none rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-black",
                 }
             ),
         }

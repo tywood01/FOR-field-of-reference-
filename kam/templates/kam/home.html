@@ -1,8 +1,11 @@
+{% extends "kam/base.html" %}
+{% block content %}
+{% load static %}
 
 <link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 
 
-<h1> This is the main homepage </h1>
+<h1 class="text-5xl font-bold mb-6 text-center">Welcome to Kam!</h1>
 
 
 <div id="divInstallApp"></div>
@@ -10,27 +13,25 @@
 
 <!-- user logged in -->
 {% if request.user.is_authenticated %}
+<div class="flex flex-col items-center gap-5">
 
-<a href="{% url 'kam:create_album' %}">
-    <button type="button">Create Album</button>
-</a>
+  <a href="{% url 'kam:all_albums' %}">
+    <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition items-center justify-center">View All Albums</button>
+  </a>
 
-
-<a href="{% url 'kam:all_albums' %}">
-    <button type="button">View All Albums</button>
-</a>
-
-
-<a href="{% url 'account_logout' %}">
-    <button type="button">Logout</button>
-</a>
+  <a href="{% url 'account_logout' %}">
+    <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition items-center justify-center">Logout</button>
+  </a>
+</div>
 
 
 <!-- user not logged in -->
 {% else %}
+<div class="flex justify-center">
 <a href="{% url 'account_login' %}">
-    <button type="button">Login</button>
-</a>
+    <button class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition">Login</button>
+  </a>
+</div>
 {% endif %}
 
 
@@ -59,3 +60,4 @@
         }
     </script>
 
+{% endblock %}

@@ -1,6 +1,24 @@
+{% extends "kam/base.html" %}
+{% block content %}
+{% load static %}
 
-<form method="post">
+<form method="post" class="w-full max-w-md mx-auto bg-white p-6 rounded-2xl shadow-lg space-y-6">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit"> Create Album </button> 
-</form>
+    
+    <!-- Render each field with consistent styling -->
+    {% for field in form %}
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ field.label_tag }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ field.errors|striptags }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  
+    <button type="submit" class="w-full bg-black text-white py-2 px-4 rounded-full hover:bg-gray-800 transition">
+      Create Album
+    </button>
+  </form>
+
+  {% endblock %}
