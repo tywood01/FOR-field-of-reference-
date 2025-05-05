@@ -1,3 +1,10 @@
+"""
+    kam/script.py
+    
+    -Authors: Tytus Woodburn
+    -Emails: tytus.woodburn@student.cune.edu
+    -Date: 05-05-2025
+"""
 import os
 
 # Define the directory containing the images

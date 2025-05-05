@@ -1,3 +1,10 @@
+"""
+    kam/models.py
+    
+    -Authors: Tytus Woodburn, Ethan L'Heureux
+    -Emails: tytus.woodburn@student.cune.edu, ethan.lheureux@student.cune.edu
+    -Date: 05-05-2025
+"""
 from django.db import models
 from django.contrib.auth.models import User
 from typing import TYPE_CHECKING

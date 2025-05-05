@@ -1,3 +1,10 @@
+"""
+    kam/tests.py
+    
+    -Authors: Tytus Woodburn, Andrew Fynaardt
+    -Emails: tytus.woodburn@student.cune.edu, andrew.fynaardt@student.cune.edu
+    -Date: 05-05-2025
+"""
 from django.test import TestCase
 from django.core.files.base import ContentFile
 from kam.forms import Form

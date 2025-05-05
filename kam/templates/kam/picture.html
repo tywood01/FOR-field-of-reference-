@@ -1,30 +1,46 @@
+<!--
+    picture.html
+
+    -Authors: Tytus Woodburn, Ethan L'Heureux
+    -Emails: tytus.woodburn@student.cune.edu, ethan.lheureux@student.cune.edu
+    -Date: 05-05-2025
+-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     {% load static %}
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Picture Capture</title>
+    <title>Picture Capture</title> 
+
+    <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Link to PWA manifest file -->
     <link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 </head>
 
 <body>
+
+    <!-- Placeholder for "Install App" prompt -->
     <div id="divInstallApp"></div>
 
+    <!-- Form to submit image data -->
     <form id="picture-form" enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        {{ form }}
+        {% csrf_token %}  <!-- CSRF token for form security -->
+        {{ form }}  <!-- Renders Django form fields -->
+
+        <!-- Hidden input where the base64 image data will be stored -->
         <input type="hidden" id="image-data" name="image_data">
 
-        <!-- Camera Video Stream -->
+        <!-- Live camera feed -->
         <video id="camera-stream" autoplay playsinline></video>
 
-        <!-- Hidden Canvas for Capture -->
+        <!-- Hidden canvas to capture video frame -->
         <canvas id="image-capture"></canvas>
 
-        <!-- Snap Button -->
+        <!-- Button to capture image and submit the form -->
         <button type="button" onclick="captureImageAndSubmit()">Snap ;)</button>
     </form>
 </body>
