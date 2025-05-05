@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 </head>
+
 <body>
     <div id="divInstallApp"></div>
 
@@ -25,37 +27,8 @@
         <!-- Snap Button -->
         <button type="button" onclick="captureImageAndSubmit()">Snap ;)</button>
     </form>
-
-    <script>
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    const videoElement = document.getElementById('camera-stream');
-                    videoElement.srcObject = stream;
-                })
-                .catch(function(error) {
-                    console.error("Error accessing the camera", error);
-                });
-        } else {
-            alert("Camera API not supported by this browser.");
-        }
-
-        function captureImageAndSubmit() {
-            const canvas = document.getElementById('image-capture');
-            const context = canvas.getContext('2d');
-            const video = document.getElementById('camera-stream');
-
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            const imageDataUrl = canvas.toDataURL('image/png');
-            const imageInput = document.getElementById('id_image');
-            imageInput.value = imageDataUrl;
-
-            document.getElementById('picture-form').submit();
-        }
-    </script>
-
 </body>
+
+<script src="{% static 'js/picture.js' %}"></script>
+
 </html>

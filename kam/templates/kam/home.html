@@ -1,3 +1,5 @@
+{% load static %}
+
 
 <link rel="manifest" crossorigin="use-credentials" href="/kam/manifest.json" />
 
@@ -33,29 +35,7 @@
 </a>
 {% endif %}
 
+<script src="{% static 'js/home.js' %}"></script>
 
-<script>
-    if ("serviceWorker" in navigator) {
-            navigator.serviceWorker
-            .register("/serviceworker.js", { scope: "/" })
-            .then((registration) => {
-                registration.unregister().then((boolean) => {
-                });
-            })
-            .catch((error) => {
-                
-            });
-            // Befor install prompt start
-            window.addEventListener('beforeinstallprompt', event => {
-            event.preventDefault();
-            var installDiv = document.getElementById('divInstallApp');
-            installDiv.innerHTML = '<button id="installApp" class="btn btn-outline-secondary ms-1">Install App</button>';
-            installDiv.addEventListener('click', () => {
-                event.prompt();
-                installDiv.innerHTML = ""
-            });
-            });
-            // Before install prompt end
-        }
-    </script>
+
 
